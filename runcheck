@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+flake8 --ignore=E501,W504 --radon-max-cc 10 ./python
