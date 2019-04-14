@@ -1,0 +1,78 @@
+#!/usr/bin/env python
+
+# stdlib modules
+from __future__ import absolute_import
+import argparse
+
+# tool modules
+from watermarkbuddy import watermarkbuddy
+
+
+# TODO: improve command line help structure (choices look like total crap)
+# TODO: verbose flag?
+# TODO: decent description
+
+
+def _build_parser():
+    """
+    Builds the command line interface.
+
+    :rtype: argparse.ArgumentParser
+    """
+    description = "Watermark utility tool."
+    parser = argparse.ArgumentParser(description=description)
+
+    # required arguments
+    req_args = parser.add_argument_group("required arguments")
+
+    help = "file to add watermark to"
+    req_args.add_argument("-i", "--input", help=help, required=True)
+
+    help = "file to use as watermark"
+    req_args.add_argument("-w", "--watermark", help=help, required=True)
+
+    help = "output file path"
+    req_args.add_argument("-o", "--output", help=help, required=True)
+
+    # optional arguments
+    help = "automatically resize the watermark to input file resolution"
+    parser.add_argument("-a", "--autoscale", help=help)
+
+    help = "x axis offset of the watermark"
+    parser.add_argument("-x", "--offsetx", help=help, type=int, default=0)
+
+    help = "y axis offset of the watermark"
+    parser.add_argument("-y", "--offsety", help=help, type=int, default=0)
+
+    help = "position of the watermark (default=top-left)"
+    choices = ["top-left", "top-right", "bottom-left", "bottom-right"]
+    parser.add_argument("-p", "--position", help=help, choices=choices, default="top-left")
+
+    help = "blend mode to use to apply watermark with (default=normal)"
+    choices = watermarkbuddy.get_blend_modes()
+    parser.add_argument("-b", "--blendmode", help=help, choices=choices, default="normal")
+
+    return parser
+
+
+if __name__ == "__main__":
+    parser = _build_parser()
+    namespace = parser.parse_args()
+
+    input_file = namespace.input
+    watermark_file = namespace.watermark
+    output_file = namespace.output
+    autoscale = namespace.autoscale
+    offset_x = namespace.offsetx
+    offset_y = namespace.offsety
+    position = namespace.position
+    blend_mode = namespace.blendmode
+
+    watermarkbuddy.add_watermark(input_file,
+                                 watermark_file,
+                                 output_file,
+                                 autoscale=autoscale,
+                                 position=position,
+                                 offset_x=offset_x,
+                                 offset_y=offset_y,
+                                 blend_mode=blend_mode)
