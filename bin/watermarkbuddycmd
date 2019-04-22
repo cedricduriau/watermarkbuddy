@@ -45,7 +45,7 @@ def _build_parser():
     parser.add_argument("-y", "--offsety", help=help, type=int, default=0)
 
     help = "position of the watermark (default=top-left)"
-    choices = ["top-left", "top-right", "bottom-left", "bottom-right"]
+    choices = watermarkbuddy.get_positions()
     parser.add_argument("-p", "--position", help=help, choices=choices, default="top-left")
 
     help = "blend mode to use to apply watermark with (default=normal)"
