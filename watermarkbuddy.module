@@ -1,7 +1,7 @@
 #%Module1.0
 
 set currentdir [file dirname $ModulesCurrentModulefile]
-conflict financebuddy
+conflict watermarkbuddy
 
 prepend-path PATH $currentdir/bin
 prepend-path PYTHONPATH $currentdir/python
