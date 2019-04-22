@@ -172,7 +172,7 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         """
         Returns the selected files.
 
-        :rtype: list[str] 
+        :rtype: list[str]
         """
         return [self._list_model.stringList()[index.row()]
                 for index in self._list_view.selectedIndexes()]
