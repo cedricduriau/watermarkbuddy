@@ -93,13 +93,13 @@ def get_resolution(input_file):
     """
     Gets the resolution of a file using ffprobe.
 
-    # TODO: double check return type
     :rtype: tuple(int, int)
     """
     cmd = ["ffprobe",
-           "-print_format", "json",
            "-show_streams",
-           "-hide_banner",
+           "-print_format", "json",
+           "-v", "quiet",  # ensure no lib data gets printed
+           "-hide_banner",  # ensure no banner gets printed
            "-select_streams", "v:0",
            input_file]
     process = subprocess.Popen(cmd,
