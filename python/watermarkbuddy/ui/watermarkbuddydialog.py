@@ -1,5 +1,6 @@
 # stdlib modules
 from __future__ import absolute_import
+import os
 
 # tool modules
 from watermarkbuddy import watermarkbuddy
@@ -138,6 +139,7 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         self._btn_remove_files.clicked.connect(self._signal_remove_files)
         self._btn_browse_watermark.clicked.connect(self._signal_browse_watermark)
         self._btn_browse_output.clicked.connect(self._signal_browse_output)
+        self._btn_run.clicked.connect(self._signal_run)
 
     def _signal_add_files(self):
         """Handles adding files."""
@@ -167,6 +169,33 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         directory = QtWidgets.QFileDialog.getExistingDirectory(self, caption, "~/")
         if directory:
             self._le_output_dir.setText(directory)
+
+    def _signal_run(self):
+        """Handles running the watermarking process."""
+        # TODO: validate
+        src_files = self._list_model.stringList()
+        watermark_file = self._le_watermark.text()
+        dst_dir = self._le_output_dir.text()
+        autoscale = self._cb_auto_scale.isChecked()
+        position = self._combo_position.currentText()
+        offset_x = self._le_offset_x.text()
+        offset_y = self._le_offset_y.text()
+        blend_mode = self._combo_blend_mode.currentText()
+
+        for src_file in src_files:
+            # build output file path
+            fname = os.path.basename(src_file)
+            dst_file = os.path.join(dst_dir, fname)
+
+            # add watermark
+            watermarkbuddy.add_watermark(src_file,
+                                         watermark_file,
+                                         dst_file,
+                                         autoscale=autoscale,
+                                         position=position,
+                                         offset_x=offset_x,
+                                         offset_y=offset_y,
+                                         blend_mode=blend_mode)
 
     def _get_selected_files(self):
         """
