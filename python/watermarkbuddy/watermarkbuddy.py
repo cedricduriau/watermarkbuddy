@@ -119,9 +119,37 @@ def add_watermark(input_file,
                   offset_x=0,
                   offset_y=0,
                   blend_mode="normal"):
-    # TODO: document
+    """
+    Add a watermark to a file.
+
+    :param input_file: file to add watermark to
+    :type input_file: str
+
+    :param watermark_file: file to use as watermark
+    :type watermark_file: str
+
+    :param output_file: output file path
+    :type output_file: str
+
+    :param autoscale: set True to resize watermark to input file
+    :type autoscale: bool
+
+    :param position: initial position of the watermark
+    :type position: str
+
+    :param offset_x: X-axis offset of the watermark
+    :type offset_x: int
+
+    :param offset_y: Y-axis offset of the watermark
+    :type offset_y: int
+
+    :param blend_mode: video filter to apply watermark with
+    :type blend_mode: str
+    """
+    # get overlay from position and offset
     overlay = _get_overlay(position, offset_x=offset_x, offset_y=offset_y)
 
+    # build complex filters
     format_data = {"overlay": overlay, "blend_mode": blend_mode}
     if autoscale:
         src_width, _src_height = get_resolution(input_file)
@@ -134,12 +162,15 @@ def add_watermark(input_file,
                            "[wm_moved][0:v]blend=all_mode={blend_mode}")
     fitlers_complex = fitlers_complex.format(**format_data)
 
+    # build arguments
     args = ["ffmpeg",
             "-y",  # overwrite output without asking
             "-i", input_file,  # source media
             "-i", watermark_file,  # watermak
             "-filter_complex", fitlers_complex,
             output_file]
+
+    # execute command
     print(" ".join(args))
     proc = subprocess.Popen(args,
                             stdout=subprocess.PIPE,
