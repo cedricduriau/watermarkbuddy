@@ -172,7 +172,6 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
 
     def _signal_run(self):
         """Handles running the watermarking process."""
-        # TODO: validate
         src_files = self._list_model.stringList()
         watermark_file = self._le_watermark.text()
         dst_dir = self._le_output_dir.text()
@@ -188,14 +187,22 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
             dst_file = os.path.join(dst_dir, fname)
 
             # add watermark
-            watermarkbuddy.add_watermark(src_file,
-                                         watermark_file,
-                                         dst_file,
-                                         autoscale=autoscale,
-                                         position=position,
-                                         offset_x=offset_x,
-                                         offset_y=offset_y,
-                                         blend_mode=blend_mode)
+            try:
+                watermarkbuddy.add_watermark(src_file,
+                                            watermark_file,
+                                            dst_file,
+                                            autoscale=autoscale,
+                                            position=position,
+                                            offset_x=int(offset_x),
+                                            offset_y=int(offset_y),
+                                            blend_mode=blend_mode)
+            except Exception as e:
+                self._show_error("ERROR: WatermarkBuddy", str(e))
+                return
+
+    def _show_error(self, title, message):
+        buttons = QtWidgets.QMessageBox.Ok
+        QtWidgets.QMessageBox.critical(self, title, message, buttons)
 
     def _get_selected_files(self):
         """
