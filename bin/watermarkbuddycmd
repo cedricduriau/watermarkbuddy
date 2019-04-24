@@ -36,7 +36,7 @@ def _build_parser():
 
     # optional arguments
     help = "automatically resize the watermark to input file resolution"
-    parser.add_argument("-a", "--autoscale", help=help)
+    parser.add_argument("-a", "--autoscale", help=help, required=False, action="store_true")
 
     help = "x axis offset of the watermark"
     parser.add_argument("-x", "--offsetx", help=help, type=int, default=0)
