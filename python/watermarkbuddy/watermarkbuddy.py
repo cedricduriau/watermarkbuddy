@@ -1,13 +1,17 @@
 # stdlib modules
+import os
 import json
 import subprocess
 
+try:
+    basestring
+except NameError:
+    basestring = str
 
-# TODO: validate_position
-# TODO: validate_offset
-# TODO: validate_blend_mode
+
 # TODO: validate_ffmpeg (use -version)
 # TODO: validate_ffprobe (use -version)
+# TODO: auto scale issue when in PAR does not match out PAR
 
 
 # =============================================================================
@@ -37,6 +41,26 @@ def _get_overlay(position, offset_x, offset_y):
 # =============================================================================
 # public
 # =============================================================================
+def validate_offset(offset):
+    try:
+        int(offset)
+    except Exception as e:
+        msg = "could not convert offset to integer"
+        raise ValueError(msg.format(offset))
+
+
+def validate_position(position):
+    valid_values = set(get_positions())
+    if position not in valid_values:
+        raise ValueError("invalid position {!r}".format(position))
+
+
+def validate_blend_mode(blend_mode):
+    blend_modes = set(get_blend_modes())
+    if blend_mode not in blend_modes:
+        raise ValueError("invalid blend mode {!r}".format(blend_mode))
+
+
 def get_blend_modes():
     """
     Returns the ffmpeg supported blend modes.
@@ -146,6 +170,24 @@ def add_watermark(input_file,
     :param blend_mode: video filter to apply watermark with
     :type blend_mode: str
     """
+    if not os.path.exists(input_file):
+        msg = "input file does not exist: {}"
+        raise ValueError(msg.format(input_file))
+
+    if not os.path.exists(watermark_file):
+        msg = "watermark file does not exist: {}"
+        raise ValueError(msg.format(watermark_file))
+
+    output_dir = os.path.dirname(output_file)
+    if not os.path.exists(output_dir):
+        msg = "output directory does not exist: {}"
+        raise ValueError(msg.format(output_dir))
+
+    validate_position(position)
+    validate_offset(offset_x)
+    validate_offset(offset_y)
+    validate_blend_mode(blend_mode)
+
     # get overlay from position and offset
     overlay = _get_overlay(position, offset_x=offset_x, offset_y=offset_y)
 
@@ -166,7 +208,7 @@ def add_watermark(input_file,
     args = ["ffmpeg",
             "-y",  # overwrite output without asking
             "-i", input_file,  # source media
-            "-i", watermark_file,  # watermak
+            "-i", watermark_file,  # watermark
             "-filter_complex", fitlers_complex,
             output_file]
 
