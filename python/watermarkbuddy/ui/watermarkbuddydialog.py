@@ -10,6 +10,8 @@ from PySide2 import QtWidgets, QtCore
 
 
 class WatermarkBuddyDialog(QtWidgets.QDialog):
+    """Graphical user interface to WatermarkBuddy."""
+
     def __init__(self):
         """Initializes the object."""
         super(WatermarkBuddyDialog, self).__init__()
