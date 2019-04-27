@@ -4,7 +4,6 @@
 [![platform](https://img.shields.io/badge/platform-linux--64-lightgrey.svg)](https://img.shields.io/badge/platform-linux--64-lightgrey.svg)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](https://img.shields.io/badge/license-MIT-green.svg)
 [![python](https://img.shields.io/badge/python-2.7%20|%203.6-blue.svg)](https://img.shields.io/badge/python-2.7%20|%203.6-blue.svg)
-[![pyside](https://img.shields.io/badge/pyside-2-blue.svg)](https://img.shields.io/badge/pyside-2-blue.svg)
 
 ## Overview
 
