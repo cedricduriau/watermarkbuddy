@@ -201,6 +201,15 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
                 return
 
     def _show_error(self, title, message):
+        """
+        Shows an error message.
+
+        :param title: error dialog window title
+        :type title: str
+
+        :param message: error message to display
+        :type message: str
+        """
         buttons = QtWidgets.QMessageBox.Ok
         QtWidgets.QMessageBox.critical(self, title, message, buttons)
 
