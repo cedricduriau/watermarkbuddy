@@ -10,10 +10,6 @@ except NameError:
     basestring = str
 
 
-# TODO: validate_ffmpeg (use -version)
-# TODO: validate_ffprobe (use -version)
-
-
 # =============================================================================
 # private
 # =============================================================================
