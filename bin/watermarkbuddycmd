@@ -16,7 +16,7 @@ def _build_parser():
 
     :rtype: argparse.ArgumentParser
     """
-    description = "Watermarking tool using ffprobe and ffmpeg."
+    description = "Watermarking tool using ffmpeg."
     parser = argparse.ArgumentParser(description=description)
 
     # required arguments
