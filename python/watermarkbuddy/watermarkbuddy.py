@@ -66,6 +66,8 @@ def _execute_cmd(args):
     :param args: arguments representing the command to execute
     :type args: list
 
+    :raises RuntimeError: if an error occurred during the execution
+
     :return: stdout of the executed process
     :rtype: str
     """
@@ -124,6 +126,30 @@ def validate_blend_mode(blend_mode):
     blend_modes = set(get_blend_modes())
     if blend_mode not in blend_modes:
         raise ValueError("invalid blend mode {!r}".format(blend_mode))
+
+
+def validate_ffmpeg():
+    """
+    Validates ffmpeg is installed.
+
+    :raises RuntimeError: if ffmpeg is not installed
+    """
+    try:
+        _execute_cmd(["ffmpeg", "-version"])
+    except RuntimeError:
+        raise RuntimeError("ffmpeg not found")
+
+
+def validate_ffprobe():
+    """
+    Validates ffprobe is installed.
+
+    :raises RuntimeError: if ffprobe is not installed
+    """
+    try:
+        _execute_cmd(["ffprobe", "-version"])
+    except RuntimeError:
+        raise RuntimeError("ffprobe not found")
 
 
 def get_blend_modes():
