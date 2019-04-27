@@ -189,13 +189,13 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
             # add watermark
             try:
                 watermarkbuddy.add_watermark(src_file,
-                                            watermark_file,
-                                            dst_file,
-                                            autoscale=autoscale,
-                                            position=position,
-                                            offset_x=int(offset_x),
-                                            offset_y=int(offset_y),
-                                            blend_mode=blend_mode)
+                                             watermark_file,
+                                             dst_file,
+                                             autoscale=autoscale,
+                                             position=position,
+                                             offset_x=int(offset_x),
+                                             offset_y=int(offset_y),
+                                             blend_mode=blend_mode)
             except Exception as e:
                 self._show_error("ERROR: WatermarkBuddy", str(e))
                 return
