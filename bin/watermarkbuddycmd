@@ -8,6 +8,7 @@ import argparse
 from watermarkbuddy import watermarkbuddy
 
 # TODO: verbose flag?
+# TODO: block position and offset when using autoscale
 
 
 def _build_parser():
