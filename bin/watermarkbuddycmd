@@ -7,10 +7,7 @@ import argparse
 # tool modules
 from watermarkbuddy import watermarkbuddy
 
-
-# TODO: improve command line help structure (choices look like total crap)
 # TODO: verbose flag?
-# TODO: decent description
 
 
 def _build_parser():
@@ -19,7 +16,7 @@ def _build_parser():
 
     :rtype: argparse.ArgumentParser
     """
-    description = "Watermark utility tool."
+    description = "Watermarking tool using ffprobe and ffmpeg."
     parser = argparse.ArgumentParser(description=description)
 
     # required arguments
@@ -35,7 +32,7 @@ def _build_parser():
     req_args.add_argument("-o", "--output", help=help, required=True)
 
     # optional arguments
-    help = "automatically resize the watermark to input file resolution"
+    help = "automatically resize the watermark to input resolution"
     parser.add_argument("-a", "--autoscale", help=help, required=False, action="store_true")
 
     help = "x axis offset of the watermark"
@@ -44,13 +41,15 @@ def _build_parser():
     help = "y axis offset of the watermark"
     parser.add_argument("-y", "--offsety", help=help, type=int, default=0)
 
-    help = "position of the watermark (default=top-left)"
+    help = "position of the watermark (default=top-left) values: {}"
     choices = watermarkbuddy.get_positions()
-    parser.add_argument("-p", "--position", help=help, choices=choices, default="top-left")
+    help = help.format(", ".join(choices))
+    parser.add_argument("-p", "--position", help=help, choices=choices, default="top-left", metavar="")
 
-    help = "blend mode to use to apply watermark with (default=normal)"
+    help = "blend mode to use to apply watermark with (default=normal) values: {}"
     choices = watermarkbuddy.get_blend_modes()
-    parser.add_argument("-b", "--blendmode", help=help, choices=choices, default="normal")
+    help = help.format(", ".join(choices))
+    parser.add_argument("-b", "--blendmode", help=help, choices=choices, default="normal", metavar="")
 
     return parser
 
