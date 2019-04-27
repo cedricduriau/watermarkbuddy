@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
     # validate ffmpeg/ffprobe
     watermarkbuddy.validate_ffmpeg()
-    watermarkbuddy.validate_ffprove()
+    watermarkbuddy.validate_ffprobe()
 
     watermarkbuddy.add_watermark(input_file,
                                  watermark_file,
