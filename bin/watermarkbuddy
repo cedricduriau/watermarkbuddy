@@ -5,6 +5,7 @@ from __future__ import absolute_import
 import sys
 
 # tool modules
+from watermarkbuddy import watermarkbuddy
 from watermarkbuddy.ui.watermarkbuddydialog import WatermarkBuddyDialog
 
 # third party modules
@@ -12,6 +13,10 @@ from PySide2 import QtWidgets
 
 
 if __name__ == "__main__":
+    # validate ffmpeg/ffprobe
+    watermarkbuddy.validate_ffmpeg()
+    watermarkbuddy.validate_ffprobe()
+
     app = QtWidgets.QApplication.instance() or QtWidgets.QApplication(sys.argv)
     tool = WatermarkBuddyDialog()
     tool.exec_()

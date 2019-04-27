@@ -67,6 +67,10 @@ if __name__ == "__main__":
     position = namespace.position
     blend_mode = namespace.blendmode
 
+    # validate ffmpeg/ffprobe
+    watermarkbuddy.validate_ffmpeg()
+    watermarkbuddy.validate_ffprove()
+
     watermarkbuddy.add_watermark(input_file,
                                  watermark_file,
                                  output_file,
