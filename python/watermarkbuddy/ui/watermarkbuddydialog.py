@@ -76,8 +76,8 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         self._combo_blend_mode.addItems(watermarkbuddy.get_blend_modes())
         self._combo_blend_mode.setToolTip("Video filter to blend the watermark file with.")
 
-        self._btn_reset_default = QtWidgets.QPushButton("Reset")
-        self._btn_reset_default.setToolTip("Resets all settings to default settings.")
+        self._btn_reset_settings = QtWidgets.QPushButton("Reset")
+        self._btn_reset_settings.setToolTip("Resets all settings to default settings.")
 
         group_box_settings = QtWidgets.QGroupBox("Settings:")
         group_box_settings.setCheckable(True)
@@ -92,7 +92,7 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         group_box_settings_layout.addWidget(self._cb_auto_scale, 2, 1, 1, 3)
         group_box_settings_layout.addWidget(lbl_blend_mode, 3, 0)
         group_box_settings_layout.addWidget(self._combo_blend_mode, 3, 1, 1, 2)
-        group_box_settings_layout.addWidget(self._btn_reset_default, 4, 0, 1, 3)
+        group_box_settings_layout.addWidget(self._btn_reset_settings, 4, 0, 1, 3)
         group_box_settings.setLayout(group_box_settings_layout)
 
         # output directory
@@ -131,6 +131,7 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         """Sets all settings back to default."""
         self._le_offset_x.setText("0")
         self._le_offset_y.setText("0")
+        self._cb_auto_scale.setChecked(False)
         self._combo_position.setCurrentText("top-left")
         self._combo_blend_mode.setCurrentText("normal")
         self._le_output_dir.setText("/tmp")
@@ -140,6 +141,8 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         self._btn_add_files.clicked.connect(self._signal_add_files)
         self._btn_remove_files.clicked.connect(self._signal_remove_files)
         self._btn_browse_watermark.clicked.connect(self._signal_browse_watermark)
+        self._cb_auto_scale.stateChanged.connect(self._signal_autoscale_changed)
+        self._btn_reset_settings.clicked.connect(self._signal_reset_settings)
         self._btn_browse_output.clicked.connect(self._signal_browse_output)
         self._btn_run.clicked.connect(self._signal_run)
 
@@ -171,6 +174,25 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         directory = QtWidgets.QFileDialog.getExistingDirectory(self, caption, "~/")
         if directory:
             self._le_output_dir.setText(directory)
+
+    def _signal_autoscale_changed(self, state):
+        """Handles changing the autoscale setting."""
+        if state == 2:
+            # reset/disable settings when autoscale is set on
+            self._le_offset_x.setText("0")
+            self._le_offset_x.setEnabled(False)
+            self._le_offset_y.setText("0")
+            self._le_offset_y.setEnabled(False)
+            self._combo_position.setCurrentText("top-left")
+            self._combo_position.setEnabled(False)
+        else:
+            self._le_offset_x.setEnabled(True)
+            self._le_offset_y.setEnabled(True)
+            self._combo_position.setEnabled(True)
+
+    def _signal_reset_settings(self):
+        """Handles resetting settings to default their values."""
+        self._set_default_settings()
 
     def _signal_run(self):
         """Handles running the watermarking process."""
