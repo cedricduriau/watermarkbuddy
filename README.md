@@ -10,7 +10,7 @@
 WatermarkBuddy is a tool using ffmpeg to easily add watermarks to files.
 
 ## Requirements
-* [ffmpeg](https://ffmpeg.org/) 2.x
+* [ffmpeg](https://ffmpeg.org/) (2.x, 3.x or 4.x)
 * [PySide2](https://pypi.org/project/PySide2/) (only for GUI)
 
 ## Install
