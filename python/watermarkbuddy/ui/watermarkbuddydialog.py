@@ -28,7 +28,9 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         self._list_model = QtCore.QStringListModel()
         self._list_view.setModel(self._list_model)
         self._btn_add_files = QtWidgets.QPushButton("Add")
+        self._btn_add_files.setToolTip("Button to add new files.")
         self._btn_remove_files = QtWidgets.QPushButton("Remove")
+        self._btn_remove_files.setToolTip("Button remove added files.")
 
         group_box_list = QtWidgets.QGroupBox("Files:")
         group_box_list_layout = QtWidgets.QVBoxLayout()
