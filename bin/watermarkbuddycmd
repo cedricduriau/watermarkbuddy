@@ -66,8 +66,11 @@ if __name__ == "__main__":
     blend_mode = namespace.blendmode
 
     # validate autoscale is not mixed with offset or position
-    if autoscale and ((offset_x != 0) or (offset_y != 0) or (position != "top-left")):
-        raise parser.error("offset cannot be used with autoscale")
+    if autoscale:
+        if (offset_x != 0) or (offset_y != 0):
+            raise parser.error("offset cannot be used with autoscale")
+        elif position != "top-left":
+            raise parser.error("position cannot be used with autoscale")
 
     # validate ffmpeg/ffprobe
     watermarkbuddy.validate_ffmpeg()
