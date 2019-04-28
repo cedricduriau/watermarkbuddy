@@ -205,6 +205,7 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         offset_y = self._le_offset_y.text()
         blend_mode = self._combo_blend_mode.currentText()
 
+        dst_files = []
         for src_file in src_files:
             # build output file path
             fname = os.path.basename(src_file)
@@ -221,8 +222,14 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
                                              offset_y=int(offset_y),
                                              blend_mode=blend_mode)
             except Exception as e:
+                # show error and stop process
                 self._show_error("ERROR: WatermarkBuddy", str(e))
                 return
+
+            dst_files.append(dst_file)
+
+        # show success messagebox
+        self._show_success("COMPLETE: WatermarkBuddy", dst_files)
 
     def _show_error(self, title, message):
         """
@@ -236,6 +243,22 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         """
         buttons = QtWidgets.QMessageBox.Ok
         QtWidgets.QMessageBox.critical(self, title, message, buttons)
+
+    def _show_success(self, title, files):
+        """
+        Shows a message box stating files were successfully created.
+
+        :param title: success dialog window title
+        :type title: str
+
+        :param files: files which were successfully created
+        :type files: list[str]
+        """
+        msg_box = QtWidgets.QMessageBox()
+        msg_box.setWindowTitle(title)
+        msg_box.setText("Successfully created files.")
+        msg_box.setDetailedText("\n".join(files))
+        msg_box.exec_()
 
     def _get_selected_files(self):
         """
