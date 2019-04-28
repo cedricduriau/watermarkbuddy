@@ -7,9 +7,6 @@ import argparse
 # tool modules
 from watermarkbuddy import watermarkbuddy
 
-# TODO: verbose flag?
-# TODO: block position and offset when using autoscale
-
 
 def _build_parser():
     """
@@ -67,6 +64,10 @@ if __name__ == "__main__":
     offset_y = namespace.offsety
     position = namespace.position
     blend_mode = namespace.blendmode
+
+    # validate autoscale is not mixed with offset or position
+    if autoscale and ((offset_x != 0) or (offset_y != 0) or (position != "top-left")):
+        raise parser.error("offset cannot be used with autoscale")
 
     # validate ffmpeg/ffprobe
     watermarkbuddy.validate_ffmpeg()
