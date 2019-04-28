@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="watermarkbuddy",
-      version="0.1.0",
+      version="1.0.0",
       description="Watermarking tool using ffmpeg.",
       license="MIT",
       author="C&eacute;dric Duriau",
