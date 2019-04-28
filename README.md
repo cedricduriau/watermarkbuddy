@@ -26,6 +26,8 @@ Or a specific release version:
 
 ## Usage
 
+To run `WatermarkBuddy` after installing, simply type one of the following command lines in a terminal.
+
 ### Graphical User Interface
 
 ```
