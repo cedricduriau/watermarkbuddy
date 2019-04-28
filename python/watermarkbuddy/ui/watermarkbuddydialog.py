@@ -115,6 +115,11 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         button_layout = QtWidgets.QHBoxLayout()
         button_layout.addWidget(self._btn_run)
 
+        # progress bar
+        self._progress_bar = QtWidgets.QProgressBar()
+        self._progress_bar.setTextVisible(False)
+        self._progress_bar.setFixedHeight(10)
+
         # main layout
         main_layout = QtWidgets.QVBoxLayout()
         main_layout.addWidget(group_box_list)
@@ -122,6 +127,7 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         main_layout.addWidget(group_box_settings)
         main_layout.addWidget(group_box_output)
         main_layout.addLayout(button_layout)
+        main_layout.addWidget(self._progress_bar)
         self.setLayout(main_layout)
 
         # window settings
@@ -205,8 +211,14 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         offset_y = self._le_offset_y.text()
         blend_mode = self._combo_blend_mode.currentText()
 
+        # set progress range
+        self._progress_bar.setRange(0, len(src_files) - 1)
+
         dst_files = []
-        for src_file in src_files:
+        for i, src_file in enumerate(src_files):
+            # update bar
+            self._progress_bar.setValue(i)
+
             # build output file path
             fname = os.path.basename(src_file)
             dst_file = os.path.join(dst_dir, fname)
@@ -230,6 +242,10 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
 
         # show success messagebox
         self._show_success("COMPLETE: WatermarkBuddy", dst_files)
+
+        # reset progress
+        self._progress_bar.setRange(0, 1)
+        self._progress_bar.setValue(0)
 
     def _show_error(self, title, message):
         """
