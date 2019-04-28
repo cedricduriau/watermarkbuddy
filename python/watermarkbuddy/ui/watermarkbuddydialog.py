@@ -158,7 +158,7 @@ class WatermarkBuddyDialog(QtWidgets.QDialog):
         paths = QtWidgets.QFileDialog.getOpenFileNames(self, caption, "~/")[0]
         current_paths = self._list_model.stringList()
         current_paths.extend(paths)
-        self._list_model.setStringList(list(set(paths)))
+        self._list_model.setStringList(list(set(current_paths)))
 
     def _signal_remove_files(self):
         """Handles removing selected files."""
