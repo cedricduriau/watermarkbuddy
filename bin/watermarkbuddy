@@ -16,8 +16,6 @@ if __name__ == "__main__":
     # validate ffmpeg/ffprobe
     watermarkbuddy.validate_ffmpeg()
     watermarkbuddy.validate_ffprobe()
-
     app = QtWidgets.QApplication.instance() or QtWidgets.QApplication(sys.argv)
     tool = WatermarkBuddyDialog()
-    tool.exec_()
-    sys.exit(app.exec_())
+    sys.exit(tool.exec_())
