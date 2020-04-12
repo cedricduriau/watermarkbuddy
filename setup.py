@@ -23,6 +23,6 @@ setup(name="watermarkbuddy",
       url="https://github.com/cedricduriau/watermarkbuddy",
       packages=find_packages(where="python"),
       package_dir={"": "python"},
-      scripts=["bin/watermarkbuddy", "bin/watermarkbuddycmd"],
+      scripts=["bin/watermarkbuddy-cli", "bin/watermarkbuddy-gui"],
       install_requires=requirements_install,
       extras_require={"dev": requirements_dev})
