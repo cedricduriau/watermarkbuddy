@@ -20,7 +20,7 @@ If you wish to install the current master, use the following command:
 
 Or a specific release version:
 
-`pip install git+git://github.com/cedricduriau/watermarkbuddy.git@1.0.0`
+`pip install git+git://github.com/cedricduriau/watermarkbuddy.git@1.1.0`
 
 
 ## Usage
