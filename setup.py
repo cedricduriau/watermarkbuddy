@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 setup(name="watermarkbuddy",
       version="1.0.0",
       description="Watermarking tool using ffmpeg.",
-      license="MIT",
+      license="GPLv3",
       author="C&eacute;dric Duriau",
       author_email="duriau.cedric@live.be",
       url="https://github.com/cedricduriau/watermarkbuddy",
