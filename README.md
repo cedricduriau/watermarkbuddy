@@ -1,9 +1,9 @@
 # WatermarkBuddy
 
-[![build](https://travis-ci.com/cedricduriau/watermarkbuddy.svg?branch=master)](https://travis-ci.com/cedricduriau/watermarkbuddy)
-[![platform](https://img.shields.io/badge/platform-linux--64-lightgrey.svg)](https://img.shields.io/badge/platform-linux--64-lightgrey.svg)
+![](https://github.com/cedricduriau/watermarkbuddy/workflows/Build/badge.svg?branch=master)
+[![Platform](https://img.shields.io/badge/Platform-linux--64-lightgrey.svg)](https://img.shields.io/badge/Platform-linux--64-lightgrey.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![python](https://img.shields.io/badge/python-2.7%20|%203.6-blue.svg)](https://img.shields.io/badge/python-2.7%20|%203.6-blue.svg)
+[![Python](https://img.shields.io/badge/Python-2.7%20|%203.6-blue.svg)](https://img.shields.io/badge/Python-2.7%20|%203.6-blue.svg)
 
 ## Overview
 
@@ -11,7 +11,6 @@ WatermarkBuddy is a tool using ffmpeg to easily add watermarks to files.
 
 ## Requirements
 * [ffmpeg](https://ffmpeg.org/) (2.x, 3.x or 4.x)
-* [PySide2](https://pypi.org/project/PySide2/) (only for GUI)
 
 ## Install
 
