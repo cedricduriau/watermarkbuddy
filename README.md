@@ -67,7 +67,7 @@ watermarkbuddy-cli -i ./examples/background.jpg -w ./examples/watermark.png -o /
 
 To automatically scale the watermark to the width of the input file, staying aspect ratio correct, you can provide the `-a/--autoscale` flag. This flag cannot be used in combination with `-p/--position`, `-x/offsetx`, `-y/offsety`.
 
-By default, `WatermarkBuddy` will apply the watermark as is, not resizing whatsoever.
+By default, the watermark will be applied as is, without resizing.
 
 ```
 watermarkbuddy-cli -i ./examples/background.jpg -w ./examples/watermark.png -o /tmp/background.jpg -a
